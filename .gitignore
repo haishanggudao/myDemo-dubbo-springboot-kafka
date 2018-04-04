@@ -9,24 +9,19 @@ Thumbs.db
 *.sublime-*  
   
 # Build Artifacts  
-  
-.gradle/  
-build/  
-target/  
-bin/  
-dependency-reduced-pom.xml  
-  
-# Eclipse Project Files  
-  
-.classpath  
-.project  
-.settings/  
-  
-# IntelliJ IDEA Files  
-  
-*.iml  
-*.ipr  
-*.iws  
-*.idea  
-  
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# ignore Maven generated target folders
+target
+
+# ignore eclipse files
+.project
+.classpath
+.settings
+.metadata
 README.html  
