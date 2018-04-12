@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+	<jmxConfigurator />
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date [%level] %logger{36} - %msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	<appender name="file"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/all.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>logs/all.%d{yyyy-MM-dd}.log.zip</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%date [%level] %logger{36} - %msg%n</pattern>
+		</layout>
+	</appender>
+	<appender name="db"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/db.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>logs/db.%d{yyyy-MM-dd}.log.zip</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%date [%level] %logger{36} - %msg%n</pattern>
+		</layout>
+	</appender>
+
+	<logger name="com.htsc.core.common.monitor.RequestStatistic" additivity="true">
+		<level value="INFO"/>
+		<appender-ref ref ="file"/>
+	</logger>
+
+	<logger name="com.htsc.springboot.framework.monitor.DatabaseOperationProfile" additivity="true">
+		<level value="INFO"/>
+		<appender-ref ref ="file"/>
+	</logger>
+	
+	<springProfile name="fz">
+		<root level="DEBUG">
+			<appender-ref ref="stdout" />
+		</root>
+	</springProfile>
+</configuration>

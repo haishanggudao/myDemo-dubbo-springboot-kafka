@@ -14,6 +14,10 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.htsc.htbcps.myDemo.dto.User;
+import com.htsc.htbcps.myDemo.services.SayHelloService;
+
+
 /**
  * Hello world!
  *
@@ -31,6 +35,9 @@ public class MyDemoApplication
 	@Autowired
     private KafkaTemplate<String, String> template;
 	
+	@Autowired
+	private SayHelloService sayHelloService;
+	
     public static void main( String[] args ) throws InterruptedException
     {
     	logger.info("项目开始启动!");
@@ -43,5 +50,23 @@ public class MyDemoApplication
     String send(String topic, String key, String data) {
         template.send(topic, key, data);
         return "success";
+    }
+    
+    @RequestMapping("/sayHello")
+    @ResponseBody
+    String sayHello(String word) {
+        System.out.println("----我是cn.larry.spring.service.DemoService.run()----1");
+        String result = sayHelloService.SayHello(word);
+        System.out.println("----我是cn.larry.spring.service.DemoService.run()----2");
+        return result;
+    }
+    
+    @RequestMapping("/getUser")
+    @ResponseBody
+    String getUser(String userId) {
+        System.out.println("----我是com.htsc.htbcps.myDemo.dubboservice.getUser()----1");
+        User user = sayHelloService.getUser(userId);
+        System.out.println("----我是com.htsc.htbcps.myDemo.dubboservice.getUser()----2");
+        return user.toString();
     }
 }

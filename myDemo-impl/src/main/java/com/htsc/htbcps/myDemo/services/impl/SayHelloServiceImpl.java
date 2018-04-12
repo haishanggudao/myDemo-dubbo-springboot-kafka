@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.htsc.htbcps.myDemo.annotation.Log;
 import com.htsc.htbcps.myDemo.common.Result;
 import com.htsc.htbcps.myDemo.dal.dao.UserModelMapper;
 import com.htsc.htbcps.myDemo.services.SayHelloService;
@@ -17,7 +18,9 @@ public class SayHelloServiceImpl implements SayHelloService {
 	private UserModelMapper userModelMapper;
 
 	@Override
+	@Log
 	public String SayHello(String word) {
+	    System.out.println("----我是cn.larry.spring.service.DemoService.run()----3");
 		return "hello " + word;
 	}
 
