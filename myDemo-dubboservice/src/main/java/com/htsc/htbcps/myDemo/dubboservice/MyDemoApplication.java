@@ -64,9 +64,9 @@ public class MyDemoApplication
     @RequestMapping("/getUser")
     @ResponseBody
     String getUser(String userId) {
-        System.out.println("----我是com.htsc.htbcps.myDemo.dubboservice.getUser()----1");
+//        System.out.println("----我是com.htsc.htbcps.myDemo.dubboservice.getUser()----1");
         User user = sayHelloService.getUser(userId);
-        System.out.println("----我是com.htsc.htbcps.myDemo.dubboservice.getUser()----2");
+//        System.out.println("----我是com.htsc.htbcps.myDemo.dubboservice.getUser()----2");
         return user.toString();
     }
 }

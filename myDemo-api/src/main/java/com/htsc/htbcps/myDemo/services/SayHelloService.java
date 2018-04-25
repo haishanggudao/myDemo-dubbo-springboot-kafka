@@ -8,4 +8,6 @@ public interface SayHelloService {
 	
 	public User getUser(String userId);
 
+	User getUserModel(String userId);
+
 }

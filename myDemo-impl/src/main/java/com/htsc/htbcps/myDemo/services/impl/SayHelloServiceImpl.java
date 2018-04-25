@@ -14,6 +14,9 @@ import com.htsc.htbcps.myDemo.dto.User;
 
 public class SayHelloServiceImpl implements SayHelloService {
 	
+    @Autowired
+    private SayHelloService sayHelloService;
+    
 	@Autowired
 	private UserModelMapper userModelMapper;
 
@@ -25,18 +28,28 @@ public class SayHelloServiceImpl implements SayHelloService {
 	}
 
 	@Override
+	@Log
 	public User getUser(String userId) {
-		UserModel userModel = userModelMapper.selectByPrimaryKey(userId);
-		User user = new User();
-		user.setUserId(userModel.getUserId());
-		user.setUsername(userModel.getUsername());
-		user.setPassword(userModel.getPassword());
-		
-		String json="{\"resultcode\":\"200\",\"reason\":\"Return Successd!\",\"result\":{\"province\":\"北京\",\"city\":\"\",\"areacode\":\"010\",\"zip\":\"100000\",\"company\":\"联通\",\"card\":\"\"},\"error_code\":0}";
-		Result<JSON> result=JSONObject.parseObject(json,Result.class);  
-		AreaInfoDto areaInfoDto =JSONObject.toJavaObject(result.getResult(),AreaInfoDto.class); 
+	    System.out.println("----测试1----------");
+	    User user = sayHelloService.getUserModel(userId);
+	    System.out.println("---------测试3------------------");
+//		String json="{\"resultcode\":\"200\",\"reason\":\"Return Successd!\",\"result\":{\"province\":\"北京\",\"city\":\"\",\"areacode\":\"010\",\"zip\":\"100000\",\"company\":\"联通\",\"card\":\"\"},\"error_code\":0}";
+//		Result<JSON> result=JSONObject.parseObject(json,Result.class);  
+//		AreaInfoDto areaInfoDto =JSONObject.toJavaObject(result.getResult(),AreaInfoDto.class); 
 	       
 		return user;
+	}
+	
+	@Override
+	@Log
+	public User getUserModel(String userId) {
+	    System.out.println("---------测试2------------------");
+	    UserModel userModel = userModelMapper.selectByPrimaryKey(userId);
+	    User user = new User();
+        user.setUserId(userModel.getUserId());
+        user.setUsername(userModel.getUsername());
+        user.setPassword(userModel.getPassword());
+	    return user;
 	}
 
 }
